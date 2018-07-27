@@ -7,3 +7,4 @@ from pwarn import pwarn
 from Nas import Nas
 from psucceed import psucceed
 from openlocal import openlocal
+from inlist import inlist

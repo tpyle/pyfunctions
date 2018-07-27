@@ -11,3 +11,4 @@ from inlist import inlist
 from pbad import pbad
 from colors import colors
 from parsetestlist import parsetestlist
+from ExceptionMessage import ExceptionMessage

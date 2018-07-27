@@ -1,3 +1,7 @@
+import sys
+import signal
+signal.signal(signal.SIGINT, lambda x,y: sys.exit(1))
+
 from ipand import ipand
 from getblocksize import getblocksize
 from peek import peek

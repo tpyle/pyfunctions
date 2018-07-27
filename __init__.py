@@ -9,3 +9,4 @@ from psucceed import psucceed
 from openlocal import openlocal
 from inlist import inlist
 from pbad import pbad
+from colors import colors

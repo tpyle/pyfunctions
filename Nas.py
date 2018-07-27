@@ -25,7 +25,7 @@ class Nas:
         args['sessionid'] = self.sessionid
         return args
     # Initializes the client and logs in
-    def __init__(self,clientstring='api.wsdl.gsoap'):
+    def __init__(self,clientstring='api.wsdl.gsoap', login=None):
         username = ''
         password = ''
         i = 0
@@ -49,12 +49,15 @@ class Nas:
         nassession.trust_env = False
         nassession.verify = False
         _nas = Client(os.path.join(os.path.dirname(__file__), clientstring), transport=Transport(session=nassession)).service
-        sessionid = ""
         try:
             sessionid = _nas.login({'username': username, 'password': password}).Text
+            res = None
+            if login != None:
+                res = login(username, password)
+            self.sessionid = sessionid
+            for func in dir(_nas):
+                if not func.startswith('_'):
+                    setattr(Nas, func, getFunc(_nas,func))
+
         except:
             pfail ( 'Invalid Credentials' )
-        self.sessionid = sessionid
-        for func in dir(_nas):
-            if not func.startswith('_'):
-                setattr(Nas, func, getFunc(_nas,func))

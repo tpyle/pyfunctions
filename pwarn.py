@@ -1,6 +1,7 @@
 import sys
+from colors import colors
 
 # Prints out the string
 # Also has pretty printing!
 def pwarn ( string ):
-    print >> sys.stderr, "{}{}{}".format('\033[93m',string,'\033[0m')
+    print >> sys.stderr, "{}{}{}".format(colors.YELLOW,string,color.END)

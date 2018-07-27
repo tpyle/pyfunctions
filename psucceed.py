@@ -1,6 +1,7 @@
 import sys
+from colors import colors
 
 # Prints out the string
 # Also has pretty printing!
 def psucceed ( string ):
-    print >> sys.stderr, "{}{}{}".format('\033[92m',string,'\033[0m')
+    print >> sys.stderr, "{}{}{}".format(colors.yellow,string,colors.END)

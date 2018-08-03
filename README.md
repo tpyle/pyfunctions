@@ -157,7 +157,7 @@ These functions all print out colored text
 `pcolor` prints out whatever color it receives, followed by the text, and then the `colors.END` described in `colors.py` -> expects to receive a string and a color, which is a string
 
 ## `peek.py`
-This is used to peek ahead in the file without advancing the file cursor
+This is used to peek ahead in the file without advancing the file cursor. It expects the file object as a parameter.
 It is used to read the next line if you don't want to 'record' that line as read
 
 Use it as follows:
@@ -166,7 +166,7 @@ from pyfunctions import peek
 
 file = open ( 'cat.txt', 'r' )
 
-print file.peek()
+print peek(file)
 print file.readline()
 # These both produce the same output, regardless of the file
 ```

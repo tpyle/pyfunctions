@@ -6,8 +6,9 @@ def parsetestlist(tests):
     _tests = [[] for j in range(256)]
     for test in tests:
         # Compile Regex
-        if not test.get('compiled',False):
-            cre = re.compile(test['test'])
-            test['test'] = cre.match
-            _tests[ord(test['let'])].append ( test )
+        cre = re.compile(test['test'])
+        ntest['test'] = cre.match
+        ntest['function'] = test['function']
+        ntest['let'] = test['let']
+        _tests[ord(test['let'])].append ( ntest )
     return _tests

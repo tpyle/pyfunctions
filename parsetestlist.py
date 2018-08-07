@@ -7,6 +7,7 @@ def parsetestlist(tests):
     for test in tests:
         # Compile Regex
         cre = re.compile(test['test'])
+        ntest = dict()
         ntest['test'] = cre.match
         ntest['function'] = test['function']
         ntest['let'] = test['let']

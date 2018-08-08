@@ -9,7 +9,7 @@ import os
 
 
 def phelp(description,clargs):
-    print >> sys.stderr, description
+    # Compute the width of the screen currently
     rows, columns = os.popen('stty size', 'r').read().split()
     columns = int(columns)
     maxlength = 0
@@ -20,15 +20,36 @@ def phelp(description,clargs):
     width = int(columns/3 - maxlength)
     if columns/3 < 50:
         width = columns-maxlength-8
+    # print the description
+    i = 0
+    dwidth = int(columns/3) + 8
+    if columns/3 < 50:
+        dwidth = min ( 80, columns )
+    while i < len ( description ):
+        end = i + dwidth
+        if len ( description ) > end:
+            end = description[i:end].rfind(' ') +1
+            if end == 0:
+                end = dwidth
+        print >> sys.stderr, description[i:i+end]
+        i += end
+    # Print arguments
     for clarg in clargs:
+        # Figure how much of the first line to print
         end = width
         if len ( clarg[1] ) > width:
             end = clarg[1][:width].rfind(' ') + 1
+            if end == 0:
+                end = width
+        # Print first line
         print >> sys.stderr, "\t{}{}{}".format(clarg[0],(' ' * (maxlength-len(clarg[0]))),clarg[1][:end])
+        # print the rest of the lines
         ci = end
         while ci < len ( clarg[1] ):
             end = ci + width
             if len ( clarg[1] ) > end:
                 end = clarg[1][ci:end].rfind(' ') + 1
+                if end == 0:
+                    end = width
             print >> sys.stderr, "\t{}{}".format((' ' * maxlength),clarg[1][ci:ci+end])
             ci += end

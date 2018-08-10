@@ -10,9 +10,9 @@ import os
 
 def phelp(description,clargs=[],portion=40,indent=4,maxwidth=None):
     preface = ' ' * indent
-    if maxwidth = 0:
+    if maxwidth == 0:
         maxwidth = None
-    if portion = 0:
+    if portion == 0:
         portion = 40
     # Compute the width of the screen currently
     rows, columns = os.popen('stty size', 'r').read().split()

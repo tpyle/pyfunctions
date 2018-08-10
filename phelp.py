@@ -8,7 +8,12 @@ import os
 # I.e. phelp("some string", [("-c","enables the c flag")]
 
 
-def phelp(description,clargs):
+def phelp(description,clargs=[],portion=40,indent=4,maxwidth=None):
+    preface = ' ' * indent
+    if maxwidth = 0:
+        maxwidth = None
+    if portion = 0:
+        portion = 40
     # Compute the width of the screen currently
     rows, columns = os.popen('stty size', 'r').read().split()
     columns = int(columns)
@@ -17,14 +22,14 @@ def phelp(description,clargs):
         if len ( clarg[0] ) > maxlength:
             maxlength = len ( clarg[0] )
     maxlength += 2
-    width = int(columns/3 - maxlength)
-    if columns/3 < 50:
-        width = columns-maxlength-8
     # print the description
     i = 0
-    dwidth = int(columns/3) + 8
-    if columns/3 < 50:
+    dwidth = int(columns*portion/100)
+    if dwidth < 80:
         dwidth = min ( 80, columns )
+    if maxwidth != None:
+        dwidth = min ( dwidth, min ( maxwidth, columns ) )
+    width = dwidth - indent - maxlength
     while i < len ( description ):
         end = i + dwidth
         if len ( description ) > end:
@@ -42,7 +47,7 @@ def phelp(description,clargs):
             if end == 0:
                 end = width
         # Print first line
-        print >> sys.stderr, "\t{}{}{}".format(clarg[0],(' ' * (maxlength-len(clarg[0]))),clarg[1][:end])
+        print >> sys.stderr, "{}{}{}{}".format(preface,clarg[0],(' ' * (maxlength-len(clarg[0]))),clarg[1][:end])
         # print the rest of the lines
         ci = end
         while ci < len ( clarg[1] ):
@@ -51,5 +56,5 @@ def phelp(description,clargs):
                 end = clarg[1][ci:end].rfind(' ') + 1
                 if end == 0:
                     end = width
-            print >> sys.stderr, "\t{}{}".format((' ' * maxlength),clarg[1][ci:ci+end])
+            print >> sys.stderr, "{}{}{}".format(preface,(' ' * maxlength),clarg[1][ci:ci+end])
             ci += end

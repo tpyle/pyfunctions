@@ -170,3 +170,35 @@ print peek(file)
 print file.readline()
 # These both produce the same output, regardless of the file
 ```
+
+## `ptask.py`
+A function to print out a 'task', in the same manner as ansible.   
+Accepts a string name, which it prints out in the following format:
+`TASK [<your string>] ***************`
+The stars go all the way to the end of the screen. Any string which wraps around the screen will have stars to the end of that line.
+
+Use as follows:
+```python
+from pyfunctions import ptask
+
+ptask("Primary Task")
+# Expected Output: TASK [Primary Task] **************************************...
+```
+
+## phelp.py
+A function to print out the help strings you might see when you run --help on a command. It takes in two arguments,
+a string description of the program, and an array of tuples. The tuples should be constructed as (string, string), where the first item is the argument in question (i.e. `-c`), and the second argument is the description of this command.
+
+The printing is formatted so that it takes up either a third of the screen, or if the screen size is too small, it will take up either the entire screen size or 80, whichever is smaller.
+
+It is used in the following manner:
+```python
+from pyfunctions import phelp
+
+phelp("This program is great for testing things", [('--help','Prints out help for this program'),('-c','Compile something')])
+# Expected output
+# This program is great for testing things
+#         --help  Prints out help for this program
+#         -c      Compile Something
+#
+```

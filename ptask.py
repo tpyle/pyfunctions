@@ -3,6 +3,6 @@ import os
 import sys
 
 def ptask(string):
-    rows,columns = os.popen('stty size', 'r').read().split()
+    rows,columns = os.popen("stty size", "r").read().split()
     columns = int(columns)
-    print >> sys.stderr, "\nTASK [{}] {}".format(string,"*" * (columns-(len(string)%columns)-8))
+    print >> sys.stderr, u"\nTASK [{}] {}".format(string,"*" * (columns-(len(string)%columns)-8))

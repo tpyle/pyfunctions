@@ -33,7 +33,7 @@ def phelp(description,clargs=[],portion=40,indent=4,maxwidth=None):
     while i < len ( description ):
         end = i + dwidth
         if len ( description ) > end:
-            end = description[i:end].rfind(' ') +1
+            end = description[i:end].rfind(" ") +1
             if end == 0:
                 end = dwidth
         print >> sys.stderr, description[i:i+end]
@@ -43,18 +43,18 @@ def phelp(description,clargs=[],portion=40,indent=4,maxwidth=None):
         # Figure how much of the first line to print
         end = width
         if len ( clarg[1] ) > width:
-            end = clarg[1][:width].rfind(' ') + 1
+            end = clarg[1][:width].rfind(" ") + 1
             if end == 0:
                 end = width
         # Print first line
-        print >> sys.stderr, "{}{}{}{}".format(preface,clarg[0],(' ' * (maxlength-len(clarg[0]))),clarg[1][:end])
+        print >> sys.stderr, u"{}{}{}{}".format(preface,clarg[0],(" " * (maxlength-len(clarg[0]))),clarg[1][:end])
         # print the rest of the lines
         ci = end
         while ci < len ( clarg[1] ):
             end = ci + width
             if len ( clarg[1] ) > end:
-                end = clarg[1][ci:end].rfind(' ') + 1
+                end = clarg[1][ci:end].rfind(" ") + 1
                 if end == 0:
                     end = width
-            print >> sys.stderr, "{}{}{}".format(preface,(' ' * maxlength),clarg[1][ci:ci+end])
+            print >> sys.stderr, u"{}{}{}".format(preface,(" " * maxlength),clarg[1][ci:ci+end])
             ci += end

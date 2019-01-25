@@ -20,3 +20,4 @@ from ensurelocaldir import ensurelocaldir
 from pcolor import pcolor
 from ptask import ptask
 from phelp import phelp
+from getallfiles import getallfiles

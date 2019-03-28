@@ -1,4 +1,4 @@
-from colors import colors
+import colors
 from pcolor import pcolor
 
 # Like pfail, but doen't fail afterwords

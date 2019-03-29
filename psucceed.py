@@ -1,4 +1,4 @@
-from colors import colors
+import colors
 from pcolor import pcolor
 
 # Prints out the string

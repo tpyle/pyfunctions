@@ -201,10 +201,38 @@ It is used in the following manner:
 ```python
 from pyfunctions import phelp
 
-phelp("This program is great for testing things", [('--help','Prints out help for this program'),('-c','Compile something')])
+phelp.phelp("This program is great for testing things", [('--help','Prints out help for this program'),('-c','Compile something')])
 # Expected output
 # This program is great for testing things
 #         --help  Prints out help for this program
 #         -c      Compile Something
 #
 ```
+
+## parse_args.py
+This provides a function to parse the arguments of a program, and return them in a structured manner. It takes in a description of the program, and a structured list of the arguments, and then returns the output. The input might look as follows:
+
+```python
+from pyfunctions import parse_args
+
+parse_args.parse_args ( "I am a test description",
+		        [{ 'name': 'Present', 'flag': '-p', 'optional': True, 'has_value': True, 'type': int, 'description': 'Determines the degree of presentness'},
+			...]
+```
+The above example shows most of the ways to define arguments: (Optional qualifiers are in parens)
+* `name`: How the argument should be returned to the program
+* `(flag)`: The flag identifier (`-x`, `-p`), should start with `-` or `--`
+* `(optional)`: Whether or not the flag is necessary (only for flags, potentially superfluous)
+* `(has_value)`: Whether the flag has a value following it (i.e. -p <num>)
+* `(type)`: The type of the argument, should be the constructor to call (such as `int`), and that constructor should be able to convert a string into that value.
+
+
+###Behavior
+Parse_args will exit if any of the required arguments are not present. It will also fail if a type conversation results in an error, or if a flag that expects an additional value does not find that value.
+
+Note that if you have a flag (say `-p` that accepts a value, it will be the immediate next value:
+`-p -x` will result in the value being `-x`.   
+Further, if there are multiple commands that accept a value, the corresponding values are expected in order.   
+`-p <val1> -x <val2> -v <val3>` -> `-pxv <val1> <val2> <val3>`
+
+Additional flags (`-h` and `--help`) are automatically added by the parser, and their presence causes the program to exit, after printing a help message.

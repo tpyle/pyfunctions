@@ -103,8 +103,10 @@ def parse_args ( desc, arglist ):
         print_help(desc, arglist)
     return ret
 
+"""
 print parse_args ( "I am a test description", [ { 'name': 'present', 'flag': '-p', 'optional': True, 'has_value': True, 'type': int, 'description': 'This specifies to make the file present' },
                      { 'name': 'cool', 'flag': '-x', 'description': 'Determined whether it is cool' },
                      { 'name': 'filename', 'description': 'The file name to use bro' },
                      { 'name': 'use_long', 'flag': '--long', 'optional': True, 'description': 'use long ints' },
                      { 'name': 'doggo', 'description': 'Whether or not doggo' }] )
+"""

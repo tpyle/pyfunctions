@@ -1,18 +1,18 @@
 import sys
 import getpass
-import __builtin__
+import builtins
 import os
 
 from requests import Session
 from zeep import Client
 from zeep.transports import Transport
-from pfail import pfail
+from .pfail import pfail
 
 # Override so it prompts over stderr
 def raw_input(prompt=None):
     if prompt:
         sys.stderr.write(str(prompt))
-        return __builtin__.raw_input()
+        return builtins.raw_input()
 
 # I need to make a closure to remember these things
 def getFunc ( _nas, funcstr ):
@@ -41,7 +41,7 @@ class Nas:
             i += 1
 
         if username == '':
-            username = raw_input('Username: ')
+            username = input('Username: ')
         if password == '':
             password = getpass.getpass()
 

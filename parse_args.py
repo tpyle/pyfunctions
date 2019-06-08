@@ -1,6 +1,6 @@
 import sys
-import phelp
-import parray
+from . import phelp
+from . import parray
 
 """
 Expects a list of arguments, without appropraite identifying metadata
@@ -56,23 +56,23 @@ def parse_args ( desc, arglist ):
                 if c.get('ishelp'):
                     print_help(desc, arglist,0)
                 elif 'name' not in c:
-                    print "Unrecognized argument '{}'".format(c['flag'])
+                    print("Unrecognized argument '{}'".format(c['flag']))
                     print_help(desc, arglist)
                 else:
                     if c.get('has'):
-                        print "Already received argument '{}'".format(c['flag'])
+                        print("Already received argument '{}'".format(c['flag']))
                         print_help(desc, arglist)
                     val = True
                     if c.get('has_value'):
                         if ( len ( sys.argv ) < i+2 ):
-                            print "'{}' Should be followed by an argument".format(c['flag'])
+                            print("'{}' Should be followed by an argument".format(c['flag']))
                             print_help(desc, arglist)
                         val = sys.argv[i+1]
                         if 'type' in c:
                             try:
                                 val = c['type'](val)
                             except:
-                                print "'{}' is not of correct type".format(val)
+                                print("'{}' is not of correct type".format(val))
                                 print_help(desc, arglist)
                         i += 1
                     ret[c['name']] = val
@@ -85,11 +85,11 @@ def parse_args ( desc, arglist ):
                     try:
                         val = c['type'](val)
                     except:
-                        print "'{}' is not of correct type".format(val)
+                        print("'{}' is not of correct type".format(val))
                         print_help(desc, arglist)
                 ret[c['name']] = val
             else:
-                print "Extra argument '{}'".format(arg)
+                print("Extra argument '{}'".format(arg))
                 print_help(desc, arglist)
         i += 1
     names=[]
@@ -99,7 +99,7 @@ def parse_args ( desc, arglist ):
         if not n.get('optional',False) and not 'has' in n:
             names.append("{} ({})".format(n['flag'],n['name']))
     if len ( names ) > 0:
-        print "Missing arguments: {}".format(parray.parray(names))
+        print("Missing arguments: {}".format(parray.parray(names)))
         print_help(desc, arglist)
     return ret
 

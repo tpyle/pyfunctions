@@ -7,13 +7,13 @@ def parray ( arr ):
     if len ( arr ) == 1:
         return arr[0]
     if len ( arr ) == 2:
-        return u"{} and {}".format(arr[0],arr[1])
+        return "{} and {}".format(arr[0],arr[1])
     i = 0
     l = len ( arr )
     for item in arr:
         if ( i == l-2 ):
             ret += "{}, and ".format(item)
         else:
-            ret += u"{}, ".format(item)
+            ret += "{}, ".format(item)
         i += 1
     return ret[:-2]

@@ -1,5 +1,5 @@
 import sys
-from pbad import pbad
+from .pbad import pbad
 
 # Prints out the string and fails with the optional error code
 # Also has pretty printing!

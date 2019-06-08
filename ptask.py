@@ -5,4 +5,4 @@ import sys
 def ptask(string):
     rows,columns = os.popen("stty size", "r").read().split()
     columns = int(columns)
-    print >> sys.stderr, u"\nTASK [{}] {}".format(string,"*" * (columns-(len(string)%columns)-8))
+    print("\nTASK [{}] {}".format(string,"*" * (columns-(len(string)%columns)-8)), file=sys.stderr)

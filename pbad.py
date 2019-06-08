@@ -1,5 +1,5 @@
-import colors
-from pcolor import pcolor
+from . import colors
+from .pcolor import pcolor
 
 # Like pfail, but doen't fail afterwords
 def pbad ( string ):
